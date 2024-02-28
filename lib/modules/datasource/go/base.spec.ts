@@ -281,17 +281,17 @@ describe('modules/datasource/go/base', () => {
         hostRules.hostType.mockReturnValue('gitlab');
         httpMock
           .scope('https://my.custom.domain')
-          .get('/golang/subgroup-api/myrepo?go-get=1')
+          .get('/group/subgroup-api/myrepo?go-get=1')
           .reply(200, Fixtures.get('go-get-gitlab-ee-private-subgroup-api.html'));
 
         const res = await BaseGoDatasource.getDatasource(
-          'my.custom.domain/golang/subgroup-api/myrepo',
+          'my.custom.domain/group/subgroup-api/myrepo',
         );
 
         expect(res).toEqual({
           datasource: GitlabTagsDatasource.id,
-          packageName: 'golang/subgroup-api/myrepo',
-          registryUrl: 'https://my.custom.domain',
+          packageName: 'group/subgroup-api/myrepo',
+          registryUrl: 'https://my.custom.domain/',
         });
       });
 
